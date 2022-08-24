@@ -1,8 +1,6 @@
 import { ethers } from "hardhat";
 
 async function main() {
- 
- 
 
   const CoalAccess = await ethers.getContractFactory("CoalAccess");
   const coalAccess = await CoalAccess.deploy();

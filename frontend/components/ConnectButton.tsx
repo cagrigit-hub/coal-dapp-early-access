@@ -2,21 +2,29 @@
 import React, { useState } from 'react';
 import {ethers} from "ethers";
 
+// Importing Contract's JSON file to get ABI.
 import CoalAccess from "../../backend/artifacts/contracts/CoalAccess.sol/CoalAccess.json";
 
+
+// useState is passed to this code. So I wrote an interface.
 interface Connect {
+  // value of useState
     userPassed: string;
+  // function of useState
     setUserPassed(user:string): void;
 }
-
+// I deployed my code with using Hardhat twice, that's why contract's address is : 
 const coalAccessAddress = '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0';
+
 const abi = CoalAccess.abi;
 
 
 function ConnectButton({userPassed,setUserPassed} : Connect) {
+
+  // Whenever a user tries to register, our register button should be disabled until their job is finished.
   const [disabled,setDisabled] = useState<boolean>(false);
 
-
+ // To get all of the users.
   const getUsers = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner()
@@ -34,7 +42,7 @@ function ConnectButton({userPassed,setUserPassed} : Connect) {
   }  
 
 
-
+// To register to early access & Log In to the website
   const handleClick = async () => {
     if (typeof window.ethereum !== 'undefined') {
         console.log("connecting...");
